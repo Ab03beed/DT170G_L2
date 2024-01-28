@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import jakarta.annotation.Resource;
+import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -35,7 +36,7 @@ public class HelloServlet extends HttpServlet {
 
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT AGE, LENGTH FROM person")) { // Adjusted query
+             ResultSet rs = stmt.executeQuery("SELECT ID, FirstName FROM Persons")) { // Adjusted query
 
             StringBuilder responseHtml = new StringBuilder("<html><body>");
             responseHtml.append("<h1>Database Connection Successful</h1>");
@@ -43,8 +44,8 @@ public class HelloServlet extends HttpServlet {
             responseHtml.append("<tr><th>Age</th><th>Length (cm)</th></tr>"); // Adjust header names as needed
 
             while (rs.next()) {
-                int age = rs.getInt("AGE");
-                float length = rs.getFloat("LENGTH"); // Assuming length is stored as a float
+                int age = rs.getInt("ID");
+                String length = rs.getString("FirstName"); // Assuming length is stored as a float
 
                 responseHtml.append("<tr>");
                 responseHtml.append("<td>").append(age).append("</td>");
