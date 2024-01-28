@@ -27,7 +27,7 @@ public class HelloServlet extends HttpServlet {
 
 
 
-    @Resource(name = "jdbc/testdb")
+    @Resource(name = "testDB")
     private DataSource dataSource;
 
     @Override
